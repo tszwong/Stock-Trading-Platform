@@ -1,0 +1,29 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/transactions_list.html 
+
+    This file is the template for the transaction history page. Shows user's transactions
+ -->
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'final_styles.css' %}">
+    </head>
+    <body>
+        <div class="content-block">
+            <div class="transact-container">
+                <h2 id="transaction-title">Transaction History</h2>
+                {% for transaction in transactions %}
+                    <div class="transact-card {% if transaction.get_transaction_type_display == 'Buy' %}buy{% elif transaction.get_transaction_type_display == 'Sell' %}sell{% endif %}">
+                        <h4>Company: {{ transaction.stock.company_name }}</h4>
+                        <h3>{{ transaction.stock.ticker }}</h3>
+                        <h2>$<span style="padding-left: 3px">{{ transaction.purchase_price }}</span></h2>
+                        <p>Quantity: {{ transaction.shares }}, Date: {{ transaction.purchase_date }}, Type: {{ transaction.get_transaction_type_display }}</p>
+                    </div>
+                    <hr id="portfolio-hr" class="transact-hr">
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

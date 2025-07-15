@@ -1,0 +1,23 @@
+<!-- mini_fb/templates/mini_fb/logged_out.html -->
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/logged_out.html
+
+    This is the logged out page for the project. It contains a message that the user has been logged out and 
+    gives them a button to log in and authenticated again.
+ -->
+
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div style="text-align: center; margin-top: 50px;">
+        <h2>You have been logged out</h2>
+
+        <!-- buton to log in -->
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-button"><a href="{% url 'login' %}" style="color: black; text-decoration: none;">Log in again</a></button>
+        </form>
+    </div>
+{% endblock %}

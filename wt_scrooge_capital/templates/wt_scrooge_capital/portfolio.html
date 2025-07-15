@@ -1,0 +1,65 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/portfolio.html
+
+    This is the portfolio page for the project. It contains a table that displays the user's portfolio information
+    like the stocks they own, how many shares they have, the price they bought the stock at, the date they bought the stock,
+    total value of the user's portfolio, current price of the sotck, and then has a link to the stock detail page for that stock
+
+    Also there's a form for the user to buy or sell shares of a stock in their portfolio
+-->
+
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div class="portfolio-container">
+        <div class="portfolio-description">
+            <h2 id="portfolio-title">Portfolio</h2>
+            <p>Total Shares : {{ portfolio_total_shares }}</p>
+            <p>Total Value : ${{ portfolio_total_value }}</p>
+        </div>
+
+        <hr id="portfolio-hr">
+
+        <table class="portfolio-table">
+            <thead>
+                <tr>
+                    <th class="portfolio-table-item">Stock</th>
+                    <th class="portfolio-table-item">Shares</th>
+                    <th class="portfolio-table-item">Purchase Price</th>
+                    <th class="portfolio-table-item">Purchase Date</th>
+                    <th class="portfolio-table-item">Current Price</th>
+                    <th class="portfolio-table-item">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in portfolio %}
+                <tr>
+                    <!-- link to stock's detail page -->
+                    <td class="portfolio-table-item"><a href="{% url 'stock_detail' item.stock.id %}">{{ item.stock.company_name }} ({{ item.stock.ticker }})</a></td>
+                    <td class="portfolio-table-item">{{ item.shares }}</td>
+                    <td class="portfolio-table-item">${{ item.purchase_price }}</td>
+                    <td class="portfolio-table-item">{{ item.purchase_date }}</td>
+                    <td class="portfolio-table-item">${{ item.stock.current_price }}</td>
+                    
+                    <!-- format the value, 2 decimal places -->
+                    <td class="portfolio-table-item">${{ item.total_value|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr id="portfolio-hr">
+
+        <!-- buy sell form -->
+        <div class="buy-sell-form">
+            <h3>Buy or Sell Shares</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ buy_sell_form.as_p }}
+                <button id="sell-btn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/watchlist_expanded.html
+
+    This file is the template for the watchlist_expanded page. This is the user's own created watchlist
+    user could remove the stock from the list by clicking the remove button. The stock card will have
+    some price info, link to stock's detail page
+-->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div class="content-block">
+        <h2 class="space-it" 
+            style="
+                margin-left: 200px;
+                background-color: rgb(18, 18, 18);
+                color: white;
+                width: 15%;
+                padding: 10px;
+                text-align: center;
+            "
+        >
+            Your Watchlist
+        </h2>
+
+        <div class="watch-rec-container">
+            {% if watchlist %}
+                {% for item in watchlist %}
+                <div class="watch-rec-card">
+
+                    <!-- remove button -->
+                    <form action="{% url 'remove_from_watchlist' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Remove</button>
+                    </form>
+        
+                    <!-- stock info -->
+                    <h4>Company: {{ item.stock.company_name }}</h4>
+                    <h3><a href="{% url 'stock_detail' item.stock.id %}" style="text-decoration: none;">{{ item.stock.ticker }}</a></h3>
+                    <p>Added Price: ${{ item.added_price }}</p>
+                    <p>Added Date: {{ item.added_date }}</p>
+                    <p>Current Price: ${{ item.current_price }}</p>
+                </div>
+                {% endfor %}
+            
+            <!-- if there is nothing in the user's watchlist it will
+             display this default message on the page -->
+            {% else %}
+                <p style="margin: 0 auto;">No items in your watchlist.</p>
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}

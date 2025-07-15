@@ -1,0 +1,26 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/home.html
+
+    This is the home page for the project. It contains a welcome message and a brief description of what the project is.
+-->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div class="content-block space-it">
+        <h2>Welcome to WT. Scrooge Capital</h2>
+        <p style="line-height: 2.0rem; margin-top: 55px; margin-bottom: 100px;">
+            Welcome to WT Scrooge Capital — your trusted partner in navigating the financial markets. 
+            Our platform is designed to empower investors of all levels with real-time market insights, 
+            personalized portfolio management, and advanced tools to track and analyze stocks. Whether 
+            you're a seasoned trader or just starting your investment journey, WT Scrooge Capital 
+            offers a comprehensive suite of resources tailored to help you make informed decisions 
+            and achieve your financial goals. Explore market trends, manage your watchlist, and keep 
+            track of your investments—all in one place. Let's build your wealth, one smart decision at a time.
+        </p>
+    </div>
+
+    <!-- put the watch list I created called "general watch list" onto the home site -->
+    {% include 'wt_scrooge_capital/watch_list.html' %}  
+{% endblock %}

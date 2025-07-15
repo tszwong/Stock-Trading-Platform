@@ -1,0 +1,26 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/profile.html
+
+    This file is the template for the profile page of the user. It includes the general watch list I made to include by defaul
+    and a list of the transactions the user has made.
+-->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <main class="grid-container">
+        <div class="profile-div">
+            <article class="one-profile" style="margin-top: auto; margin-bottom: auto;">
+                <div style="margin: auto;">
+                    <h1 style="font-family: 'DM Serif Text', serif; font-size: 35px; text-align: center;">{{ profile.first_name }} {{ profile.last_name }}'s Profile</h1>
+
+                    <!-- call the watch list -->
+                    {% include 'wt_scrooge_capital/watch_list.html' %} 
+                    <!-- call the transactions list -->
+                    {% include 'wt_scrooge_capital/transactions_list.html' %} 
+                </div>
+            </article>
+        </div>
+    </main>
+{% endblock %}  

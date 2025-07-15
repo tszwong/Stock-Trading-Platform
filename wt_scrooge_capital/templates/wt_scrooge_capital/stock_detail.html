@@ -1,0 +1,46 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/stock_detail.html
+
+    This file is the template for the stock detail page. Shows the stock's details
+    including the ticker, company name, current price, day price difference, shares owned,
+    open price, close price, max price, min price, region, and type
+
+    Also includes a price chart for the stock's price history for hte past 12 hours
+-->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div class="info-header" id="info-header-title">
+        <h3>{{ stock.company_name }} ({{ stock.ticker }}) ${{ stock.current_price }}</h3>
+    </div>
+
+    <div class="info-header">
+        {% if price_chart %}
+            <div class="price-chart">
+                {{ price_chart|safe }}
+            </div>
+        {% else %}
+            <p>No price history available for this stock.</p>
+        {% endif %}
+    </div>
+
+    <div class="additional-info-section">
+        <h3 id="ad-info-title">Details</h3>
+        <div class="info-content">
+            <div class="left additional-info-content" id="lad">
+                <p><strong>Shares Owned: </strong><span class="space">.</span>{{ shares_owned }}</p>
+                <p><strong>Open Price: </strong><span class="space">.</span>${{ open_price }}</p>
+                <p><strong>Close Price: </strong><span class="space">.</span>${{ close_price }}</p>
+                <p><strong>Day Difference: </strong><span class="space">.</span>${{ diff }}</p>
+            </div>
+            <div class="right additional-info-content" id="rad">
+                <p><strong>Max Price: </strong><span class="space">.</span>${{ max_price }}</p>
+                <p><strong>Min Price: </strong><span class="space">.</span>${{ min_price }}</p>
+                <p><strong>Region: </strong><span class="space">.</span>{{ region }}</p>
+                <p><strong>Type: </strong><span class="space">.</span>{{ type }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/login.html
+
+    This is the login page for the project. It contains a form for the user to log in with their username and password.
+    If the user doesn't have an account they can click on the link to register for an account which sends them to the signup page
+    containing a registration form to fill out information to create an account
+-->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+{% load static %}
+
+<!-- login.html -->
+
+{% block content %}
+    <div class="login-container">
+        <div class="left">
+            <img src="{% static 'wt_logo_big.png' %}" style="width: 200px; height: auto;">
+        </div>
+        <div class="right">
+            <h2>Log in to Scrooge Capital</h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                </div>
+                <input type="hidden" name="next" value="{% url 'home' %}">
+                <input type="submit" value="Log In" class="login-button">
+
+                <!-- register for an account link -->
+                <div class="sign_up_link">
+                    <p>Not on Scrooge? <a href="{% url 'signup' %}">Register for an account</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
